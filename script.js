@@ -1,25 +1,35 @@
 // image variables
 var imageArray;
-var backImage, sunImage, moonImage;
+var backImage, boltImage, cloudImage, sunImage, moonImage, smileyImage, heartImage;
 var transitionImage1, transitionImage2, transitionImage3;
 
 // animation variables
-var sunAnimation, moonAnimation;
+var boltAnimation, cloudAnimation, sunAnimation, moonAnimation, smileyAnimation,
+heartAnimation;
 
-// sprites variables
+// sprite variables
 var spriteArray;
+var boltSprite1, boltSprite2;
+var cloudSprite1, cloudSprite2;
 var sunSprite1, sunSprite2;
 var moonSprite1, moonSprite2;
+var smileySprite1, smileySprite2;
+var heartSprite1, heartSprite2;
 var spriteWidth, spriteHeight;
 var spriteX, spriteY;
 
+// sound variables
+var flipSound, matchSound, nopeSound, winSound, loseSound, bgMusic;
+
 // game variables
-var spritesActive;
+var firstsprite, secondsprite;
 var lives, matches;
-var firstChoice, secondChoice;
+var spritesActive;
 
 // UI variables
 var gameScreen;
+var messageDisplay, livesDisplay;
+var resetButton, musicButton;
 
 /*
  * function loadImages()
@@ -47,14 +57,24 @@ var gameScreen;
  */
 
 
+/*
+ * function loadSounds()
+ * Works very similarly to loadImages(), only for music and sound effects.
+ * Example:
+   function loadSounds() {
+     soundFormats("mp3", "wav");
+     mySound = loadSound("assets/sound/sound.wav");
+     myOtherSound = loadSound("assets/sound/otherSound.mp3");
+   }
+ */
+
 
 /*
  * function preload()
  * Called automatically by p5.play. Loads all assets for your game (e.g.,
  * images, sounds) before p5 calls setup(), to ensure that the game does not
  * begin running until the assets are loaded and ready. Therefore, this function
- * is essentially a "pre-setup" function. It should only call loadImages() and
- * loadAnimations(), in that order.
+ * is essentially a "pre-setup" function. 
  */
 
 
@@ -68,6 +88,27 @@ var gameScreen;
 
 /*
  * function draw()
+ */
+
+/*
+ * function init()
+ * Initializes various elements of the game. Called in both setup() and
+ * resetGame(). Helps reduce some of the bloat and redundancy in both of those
+ * functions (DRY principle = "don't repeat yourself")
+ */
+
+
+/*
+ * function resetGame()
+ * Resets the game by calling init(), resetAllSprites(), then after a 1000
+ * millisecond delay, calls shuffle(spriteArray, true), placeSprites(), and
+ * sets spritesActive to true.
+ */
+
+
+/*
+ * function toggleMusic()
+ * Toggles the background music on and off.
  */
 
 
@@ -97,12 +138,11 @@ var gameScreen;
 
 /*
  * function addAnimations()
- * Adds an animation to each sprite in spriteArray (that is, each sprite).
- * The animations have already been loaded using loadAnimations(), so this
- * function is responsible for actually adding them to the sprites.
- * Additionally, this function initializes each animation's frameDelay, loop,
- * and playing properties. Finally, this function calls activateSprite(s) with
- * each sprite as input.
+ * Adds an animation to each sprite in spriteArray. The animations have already
+ * been loaded using loadAnimations(), so this function is responsible for
+ * actually adding them to the sprites. Additionally, this function initializes
+ * each animation's frameDelay, loop, and playing properties. Finally, this
+ * function calls activateSprite(s) with each sprite as input.
  */
 
 
@@ -141,8 +181,13 @@ var gameScreen;
  * reset and try again with a fresh shuffle.
  */
 
+/*
+ * function flipAllSprites()
+ * Flips all sprites in spriteArray to their last animation frame (i.e.,
+ * "face-up").
+ */
+
  /*
-  * function flipAllSprites()
-  * Flips all sprites in spriteArray to their last animation frame (i.e.,
-  * "face-up").
+  * function resetAllSprites()
+  * Does exactly the opposite of the above function!
   */
