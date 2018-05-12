@@ -124,6 +124,7 @@ function preload() {
    shuffle(spriteArray, true);
    placeSprites();
    spritesActive = true;
+
  }
 
 
@@ -183,7 +184,6 @@ function resizeImages() {
      mySprite = createSprite(0, 0, spriteWidth, spriteHeight);
    }
  */
-
  function createSprites() {
    boltSprite1 = createSprite(0, 0, spriteWidth, spriteHeight);
    boltSprite2 = createSprite(0, 0, spriteWidth, spriteHeight);
@@ -209,7 +209,7 @@ function resizeImages() {
  * function calls activateSprite(s) with each sprite as input.
  */
  function addAnimations() {
-   console.log("Did I even reach this part? Add animations?");
+   console.log("Did I even reach this part? Add aminations?");
    var animations = [boltAnimation, boltAnimation, cloudAnimation, cloudAnimation,
                     sunAnimation, sunAnimation, moonAnimation, moonAnimation,
                     smileyAnimation, smileyAnimation,
@@ -222,6 +222,7 @@ function resizeImages() {
      activateSprite(spriteArray[i]);
    }
  }
+
 
 /*
  * function placeSprites()
@@ -257,24 +258,28 @@ function resizeImages() {
  * two sprites have been clicked, the function calls checkMatch().
  */
 
-//funactions are hoiseted to the top of thr script ; variables are not hoiseted.
+ // functions are hoisted to the top of the script. variables are not hoisted.
+
+ function activateSprite(s) {
+   s.onMousePressed = function() {
+     console.log("Hello!");
+     if(spritesActive && s.animation.getFrame() !== s.animation.getLastFrame()) {
+       if(firstsprite === undefined) {
+         firstsprite = s;
+         // flipSound.play();
+         s.animation.goToFrame(s.animation.getLastFrame());
+       }
+       else if(s !== firstsprite) {
+         secondsprite = s;
+         //flipSound.play();
+         s.animation.goToFrame(s.animation.getLastFrame());
+
+       }
+     }
+   }
+ }
 
 
-function activateSprite(s){
-  s.onMousePressed = function(){
-    if(spritesActive && s.animation.getFrame() !== s.animation.getLastFrame()){
-      if(firstsprite === undefined){
-      firstsprite = s;
-      //flipSound.play();
-      s.animation.goToFrame(s.animation.getLastFrame());
-      }
-      else if(s !== firstsprite)
-      secondsprite = s;
-      //flipSound.play();
-      s.animation.goToFrame(s.animation.getLastFrame());
-    }
-  }
-}
 
 /*
  * function checkMatch()
